@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list customers</title>
+</head>
+
+<body>
+    <h1 align="center">list all customers</h1>
+    <ol style="margin-left: 420px">
+        {%for customer in customerlist%}
+            <li>{{customer[1], customer[2],customer[3], customer[4]}} </li></br>
+        {%endfor%}
+    </ol>
+<!--    <form method="post">-->
+<!--      <label for="fname">First name:</label>-->
+<!--      <input type="text" id="fname" name="fname"><br><br>-->
+<!--      <input type="submit" value="Submit">-->
+<!--    </form>-->
+</body>
+</html>

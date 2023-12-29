@@ -1,0 +1,59 @@
+<!--#name: weimin xu-->
+<!--#studentID: 1159079-->
+
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+    h1 {
+        margin-top: 80px
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+</style>
+
+<h2 align="center">Curent Job List</h2>
+
+<!-- code to display list of jobs-->
+<table border="1" align="center">
+    <tr>
+        <th>Current_Date</th>
+        <th>Customer_ID</th>
+        <th>Customer_Name</th>
+        <th>Jobs_ID</th>
+        <th>Jobs_Name</th>
+        <th>Services_ID</th>
+        <th>Services_Name</th>
+        <th>Parts_ID</th>
+        <th>Parts_Name</th>
+        <th>Parts_Amount</th>
+        <th>Billing_Conditions</th>
+        <th>Billing_Amount</th>
+        <th>Billing_Overdue</th>
+        <th>Billing_Histories</th>
+    </tr>
+    {% for job in job_list %}
+        <tr>
+            {% for field in job %}
+                <td>{{field}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

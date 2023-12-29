@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        label {
+            display:inline-block;
+            width:40px;
+            text-align:right;
+            margin-left:50px
+            }
+    </style>
+</head>
+
+<body>
+    <h1> I am an administor</h1>
+
+    <ol><a align="center" href="{{url_for('tolist_allcustomer_information')}}" >Click here to list all customer</a></ol>
+
+    <ol><a align="center" >Click here to add a new customer{{result}}</a></ol>
+<!--    <form method = "POST" action="{{url_for('toadd_customer')}}" >-->
+    <form method = "POST" action="toadd_customer" >
+        <label>first_name:</label> <input style="margin-left: 70px" type="text" name="first_name"><br/>
+        <label>family_name:</label> <input style="margin-left: 70px" type="text" name="family_name"><br/>
+        <label>customer_email:</label> <input style="margin-left: 70px" type="email" name="customer_email"><br/>
+        <label>customer_phone:</label> <input style="margin-left: 70px" type="text" name="customer_phone"><br/>
+        <input type = "submit" value="Submit" style="margin-left: 120px" >
+    </form>
+
+    <ol><a align="center">Click here to search a customer information using id</a></ol>
+    <form method = "POST" action="tosearch_customer_id">
+        <label >customer_id:</label> <input style="margin-left: 70px" type="text" name="customer_id"><br/><br/>
+        <input type = "submit" value="Submit_customer_id" style="margin-left: 120px" >
+    </form>
+
+    <ol><a align="center">Click here to search a customer information by name</a></ol>
+    <form method="POST" action="tosearch_customer_name">
+        <label >first_name or family_name:</label> <input style="margin-left: 70px" type="text" name="customer_name"><br/><br/>
+        <input type = "submit" value="Submit_customer_name" style="margin-left: 120px" >
+    </form>
+
+    <ol><a align="center">Click here to add a new service to system</a></ol>
+    <form method="POST" action="toadd_newservices_system">
+        <label >newservice_name:</label> <input style="margin-left: 80px" type="text" name="new_service_name"><br/>
+        <label >newservice_cost:</label> <input style="margin-left: 80px" type="text" name="new_service_cost"><br/><br/>
+        <input type = "submit" value="Submit_newservice_system" style="margin-left: 120px" >
+    </form>
+
+    <ol><a align="center" href="{{url_for('toadd_newparts_system')}}" >Click here to add a new part to system</a></ol>
+    <label >newpart_id:</label> <input style="margin-left: 70px" type="text" name="new_part_id"><br/>
+    <label >newpart_name:</label> <input style="margin-left: 70px" type="text" name="new_part_name"><br/>
+    <label >newpart_cost:</label> <input style="margin-left: 70px" type="text" name="new_part_cost"><br/><br/>
+
+    <ol><a align="center" href="{{url_for('toschedule_job_jobid')}}" >Click here to schedule a job using jobid</a></ol>
+    <label >job_due_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_jobid"><br/><br/>
+
+    <ol><a align="center" href="{{url_for('toschedule_job_customerid')}}" >Click here to schedule a job by customerid</a></ol>
+    <label >job_due_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_customerid"><br/><br/>
+
+    <ol><a align="center" href="{{url_for('toschedule_job_customername')}}" >Click here to schedule a job by customername</a></ol>
+    <label >job_due_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_customername"><br/><br/>
+
+    <ol><a align="center" href="{{url_for('tocheck_paycondition_jobid')}}" >Click here to check customer payment condition using jobid</a></ol>
+
+</body>
+</html>
