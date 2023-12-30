@@ -58,6 +58,23 @@ class administrator_api:
     #Shows all unpaid bills in date then customer order, which can be filtered by customer.
     # A bill can then be selected so that it can be marked as paid by the Admin.
     # Bills that are paid should not show on the list.
+    def tocheck_paycondition(self, connection):
+       list_customer_paycondition = []
+       list = []
+       connection.execute("SELECT * FROM job WHERE paid = 0;")
+       customerlist = connection.fetchall()
+       for i in range(len(customerlist)):
+               list_customer_paycondition.append(str(customerlist[i][1]))
+               list_customer_paycondition.append(customerlist[i][2])
+               list_customer_paycondition.append(customerlist[i][3])
+               list_customer_paycondition.append(customerlist[i][4])
+               list_customer_paycondition.append(customerlist[i][5])
+               list.append(list_customer_paycondition)
+               list_customer_paycondition = []
+               print(list)
+       return list
+
+
     def unpaidbills_or_payedbills(customer_id):
         pass
 
@@ -103,6 +120,25 @@ class administrator_api:
 
     def get_next_serviceid(self, connection):
         connection.execute('select max(service_id) from service;')
+        id = connection.fetchall()
+        id = id[0][0] + 1
+        return id
+
+
+    def get_next_partid(self, connection):
+        connection.execute('select max(part_id) from part;')
+        id = connection.fetchall()
+        id = id[0][0] + 1
+        return id
+
+    def get_next_jobid(self, connection):
+        connection.execute('select max(job_id) from job;')
+        id = connection.fetchall()
+        id = id[0][0] + 1
+        return id
+
+    def get_next_customer(self, connection):
+        connection.execute('select max(customer) from job;')
         id = connection.fetchall()
         id = id[0][0] + 1
         return id

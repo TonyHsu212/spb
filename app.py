@@ -77,7 +77,7 @@ def toadd_customer():
     # admin_api.getresutl(result)
     id = admin_api.get_next_customerid(connection)
     connection.execute("insert into customer values (%s,%s,%s,%s,%s)", (id,result['first_name'], result['family_name'],result['customer_email'],result['customer_phone']))
-
+    connection.close()
     return render_template("admin.html", result='****Successfully')
 
 
@@ -91,6 +91,7 @@ def tosearch_customer_id():
     # customerlist = admin_api.customers_search(id, connection)
     connection.execute("SELECT * FROM customer where customer_id = %s;", (id,))
     customerlist = connection.fetchall()
+    connection.close()
     return render_template('customer_list.html', customerlist = customerlist)
 
 @app.route("/tosearch_customer_name", methods=["POST", "GET"])
@@ -106,6 +107,7 @@ def tosearch_customer_name():
     # customerlist = admin_api.customers_search(id, connection)
     connection.execute("SELECT * FROM customer where first_name = %s or family_name = %s;", (customer_name, customer_name, ))
     customerlist = connection.fetchall()
+    connection.close()
     return render_template('customer_list.html', customerlist = customerlist)
 
 
@@ -121,48 +123,63 @@ def toadd_newservices_system():
     id = admin_api.get_next_serviceid(connection)
     print(id)
     connection.execute("insert into service values (%s,%s,%s)", (id, result['new_service_name'], result['new_service_cost']))
-
+    connection.close()
     return render_template("admin.html", result='****Successfully')
 
 
-@app.route("/customer_list")
+@app.route("/toadd_newparts_system", methods=['post', 'get'])
 def toadd_newparts_system():
-    return render_template('customer_list.html')
+    connection = getCursor()
+    if request.method == 'POST':
+        result = request.form.to_dict()
 
-@app.route("/customer_list")
+    print(result['new_part_cost'])
+    print(result['new_part_name'])
+    # admin_api.getresutl(result)
+    id = admin_api.get_next_partid(connection)
+    print(id)
+    connection.execute("insert into part values (%s,%s,%s)", (id, result['new_part_name'], result['new_part_cost']))
+    connection.close()
+    return render_template("admin.html", result='****Successfully')
+
+
+@app.route("/toschedule_job_jobid", methods=['post', 'get'])
 def toschedule_job_jobid():
-    return render_template('customer_list.html')
+    connection = getCursor()
+    if request.method == 'POST':
+        result = request.form.to_dict()
 
-@app.route("/customer_list")
+    print(result['schedule_job_jobid'])
+    print(result['toschedule_job_jobdate'])
+    # admin_api.getresutl(result)
+    id = admin_api.get_next_jobid(connection)
+    print(id)
+    connection.execute("update job set job_date = (%s) where job_id = (%s)", (result['toschedule_job_jobdate'],result['schedule_job_jobid'],))
+    connection.close()
+    return render_template("admin.html", result='****Successfully')
+
+
+@app.route("/toschedule_job_customerid", methods=['post', 'get'])
 def toschedule_job_customerid():
-    return render_template('customer_list.html')
+    connection = getCursor()
+    if request.method == 'POST':
+        result = request.form.to_dict()
 
-@app.route("/customer_list")
-def toschedule_job_customername():
-    return render_template('customer_list.html')
-
-
-@app.route("/customer_list")
-def tocheck_paycondition_jobid():
-    return render_template('customer_list.html')
-
-@app.route("/customer_list")
-def tocheck_paycondition_customerid():
-    return render_template('customer_list.html')
-
-@app.route("/customer_list")
-def tocheck_paycondition_customername():
-    return render_template('customer_list.html')
+    # print(result['schedule_job_customerid'])
+    # print(result['schedule_job_due_date'])
+    connection.execute("update job set job_date = (%s) where customer = (%s)", (result['schedule_job_due_date'],result['schedule_job_customerid'],))
+    connection.close()
+    return render_template("admin.html", result='****Successfully')
 
 
 
+@app.route("/tocheck_paycondition")
+def tocheck_paycondition():
+    connection = getCursor()
+    customerlist = admin_api.tocheck_paycondition(connection)
 
-
-
-
-
-
-
+    connection.close()
+    return render_template('payout_status.html', customerlist = customerlist)
 
 
 if __name__ == '__main__':

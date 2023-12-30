@@ -47,21 +47,30 @@
         <input type = "submit" value="Submit_newservice_system" style="margin-left: 120px" >
     </form>
 
-    <ol><a align="center" href="{{url_for('toadd_newparts_system')}}" >Click here to add a new part to system</a></ol>
-    <label >newpart_id:</label> <input style="margin-left: 70px" type="text" name="new_part_id"><br/>
-    <label >newpart_name:</label> <input style="margin-left: 70px" type="text" name="new_part_name"><br/>
-    <label >newpart_cost:</label> <input style="margin-left: 70px" type="text" name="new_part_cost"><br/><br/>
+    <ol><a align="center">Click here to add a new part to system</a></ol>
+    <form method="POST" action="toadd_newparts_system">
+        <label >newpart_name:</label> <input style="margin-left: 70px" type="text" name="new_part_name"><br/>
+        <label >newpart_cost:</label> <input style="margin-left: 70px" type="text" name="new_part_cost"><br/><br/>
+        <input type = "submit" value="Submit_newpart_system" style="margin-left: 120px" >
+    </form>
 
-    <ol><a align="center" href="{{url_for('toschedule_job_jobid')}}" >Click here to schedule a job using jobid</a></ol>
-    <label >job_due_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_jobid"><br/><br/>
+    <ol><a align="center">Click here to schedule a job using jobid</a></ol>
+    <form method="POST" action="toschedule_job_jobid">
+        <label >job_id:</label> <input style="margin-left: 70px" type="text" name="schedule_job_jobid"><br/><br/>
+        <label >job_booking_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_jobdate"><br/><br/>
+        <input type = "submit" value="Schedule_job" style="margin-left: 130px" >
+    </form>
 
-    <ol><a align="center" href="{{url_for('toschedule_job_customerid')}}" >Click here to schedule a job by customerid</a></ol>
-    <label >job_due_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_customerid"><br/><br/>
+    <ol><a align="center">Click here to schedule a job by customerid</a></ol>
+    <form method="POST" action="toschedule_job_customerid">
+        <label >customer_id:</label> <input style="margin-left: 70px" type="text" name="schedule_job_customerid"><br/><br/>
+        <label >job_booking_date:</label> <input style="margin-left: 70px" type="text" name="schedule_job_due_date"><br/><br/>
+        <input type = "submit" value="Submit_schedule_job_jobid" style="margin-left: 130px" >
+    </form>
 
-    <ol><a align="center" href="{{url_for('toschedule_job_customername')}}" >Click here to schedule a job by customername</a></ol>
-    <label >job_due_date:</label> <input style="margin-left: 70px" type="text" name="toschedule_job_customername"><br/><br/>
 
-    <ol><a align="center" href="{{url_for('tocheck_paycondition_jobid')}}" >Click here to check customer payment condition using jobid</a></ol>
+    <ol><a align="center" href="{{url_for('tocheck_paycondition')}}" >Click here to check customer payment condition</a></ol>
+
 
 </body>
 </html>
