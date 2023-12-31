@@ -90,8 +90,21 @@ class administrator_api:
     # the total cost of the job. Bills should be grouped by customer,
     # so that the customer details are only shown once above the list of bills for that customer.
     # Customers should be shown in last name, first name order. Bills should be shown with the oldest bill first.
-    def billing_history(customer_id):
-        pass
+    def toview_paymenthistory(customer_id, connection):
+       list_customer_paycondition = []
+       list = []
+       connection.execute("SELECT * FROM job WHERE paid = 1;")
+       customerlist = connection.fetchall()
+       for i in range(len(customerlist)):
+               list_customer_paycondition.append(str(customerlist[i][1]))
+               list_customer_paycondition.append(customerlist[i][2])
+               list_customer_paycondition.append(customerlist[i][3])
+               list_customer_paycondition.append(customerlist[i][4])
+               list_customer_paycondition.append(customerlist[i][5])
+               list.append(list_customer_paycondition)
+               list_customer_paycondition = []
+               print(list)
+       return list
 
     def billing_history(customer_name):
         pass

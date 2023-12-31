@@ -78,7 +78,7 @@ def toadd_customer():
     id = admin_api.get_next_customerid(connection)
     connection.execute("insert into customer values (%s,%s,%s,%s,%s)", (id,result['first_name'], result['family_name'],result['customer_email'],result['customer_phone']))
     connection.close()
-    return render_template("admin.html", result='****Successfully')
+    return render_template("admin.html", result1='****Successfully')
 
 
 @app.route("/tosearch_customer_id", methods=["POST", "GET"])
@@ -124,7 +124,7 @@ def toadd_newservices_system():
     print(id)
     connection.execute("insert into service values (%s,%s,%s)", (id, result['new_service_name'], result['new_service_cost']))
     connection.close()
-    return render_template("admin.html", result='****Successfully')
+    return render_template("admin.html", result2='****Successfully')
 
 
 @app.route("/toadd_newparts_system", methods=['post', 'get'])
@@ -140,7 +140,7 @@ def toadd_newparts_system():
     print(id)
     connection.execute("insert into part values (%s,%s,%s)", (id, result['new_part_name'], result['new_part_cost']))
     connection.close()
-    return render_template("admin.html", result='****Successfully')
+    return render_template("admin.html", result3='****Successfully')
 
 
 @app.route("/toschedule_job_jobid", methods=['post', 'get'])
@@ -156,7 +156,7 @@ def toschedule_job_jobid():
     print(id)
     connection.execute("update job set job_date = (%s) where job_id = (%s)", (result['toschedule_job_jobdate'],result['schedule_job_jobid'],))
     connection.close()
-    return render_template("admin.html", result='****Successfully')
+    return render_template("admin.html", result4='****Successfully')
 
 
 @app.route("/toschedule_job_customerid", methods=['post', 'get'])
@@ -169,7 +169,7 @@ def toschedule_job_customerid():
     # print(result['schedule_job_due_date'])
     connection.execute("update job set job_date = (%s) where customer = (%s)", (result['schedule_job_due_date'],result['schedule_job_customerid'],))
     connection.close()
-    return render_template("admin.html", result='****Successfully')
+    return render_template("admin.html", result5='****Successfully')
 
 
 
@@ -179,7 +179,15 @@ def tocheck_paycondition():
     customerlist = admin_api.tocheck_paycondition(connection)
 
     connection.close()
-    return render_template('payout_status.html', customerlist = customerlist)
+    return render_template('payout_status.html', customerlist = customerlist, str1='list all customers payout status')
+
+@app.route("/toview_paymenthistory")
+def toview_paymenthistory():
+    connection = getCursor()
+    customerlist = admin_api.toview_paymenthistory(connection)
+
+    connection.close()
+    return render_template('payout_status.html', customerlist = customerlist, str2='list all customers payout history')
 
 
 if __name__ == '__main__':
