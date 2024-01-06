@@ -9,14 +9,26 @@
     <title>Selwyn Panel Beaters</title>
 </head>
 <body>
+
     <h1 align="center">Selwyn Panel Beaters</h1>
+
     <div class="login">
       <button class="btn_login" type="button" data-bs-toggle="login" aria-expanded="false">
         who are you?
       </button>
+
       <ul class="login_menu">
-        <li><a align="center" href="{{url_for('to_admin')}}" >i am an administrator</a></li><br/>
-        <li><a align="center" href="{{url_for('to_technician')}}">i am a technician</a></li>
+        <li>
+            <button class="btn btn-outline-success me-2" type="button">
+                <a align="center" href="{{url_for('to_admin')}}" >i am an administrator</a>
+            </button>
+        </li><br/>
+
+        <li>
+            <button class="btn btn-sm btn-outline-secondary" type="button" >
+            <a align="center" href="{{url_for('to_technician')}}">i am a technician</a>
+            </button>
+        </li>
       </ul>
     </div>
 </body>

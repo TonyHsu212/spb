@@ -2,8 +2,10 @@
 #studentID: 1159079
 from flask import Flask, render_template
 from werkzeug.datastructures import ImmutableDict
+from wtforms import Form, StringField, PasswordField, validators, BooleanField
+from wtforms.validators import InputRequired
 
-app = Flask(__name__)
+
 
 class administrator_api:
     #Display a list of customers, ordered by surname, then by first name.

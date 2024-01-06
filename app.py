@@ -12,13 +12,15 @@ import mysql.connector
 from mysql.connector import FieldType
 import connect
 from admin_interface import administrator_api
+from technician_interface import techician_api
+import bootstrap4
 
 app = Flask(__name__)
 
 dbconn = None
 connection = None
 admin_api = administrator_api()
-
+tech_api = techician_api()
 
 def getCursor():
     global dbconn
@@ -28,6 +30,7 @@ def getCursor():
     database=connect.dbname, autocommit=True)
     dbconn = connection.cursor()
     return dbconn
+
 
 
 @app.route("/")
@@ -188,6 +191,19 @@ def toview_paymenthistory():
 
     connection.close()
     return render_template('payout_status.html', customerlist = customerlist, str2='list all customers payout history')
+
+@app.route("/toadd_services")
+def add_services():
+    connection = getCursor()
+    if request.method == 'POST':
+        result = request.form.to_dict()
+
+    # admin_api.getresutl(result)
+    id = tech_api.get_next_jobid(connection)
+    connection.execute("insert into job values (%s,%s,%s,%s,%s)", (id,result['first_name'], result['family_name'],result['cost'],result['quant']))
+    connection.close()
+    return render_template("admin.html", result1='****Successfully')
+
 
 
 if __name__ == '__main__':
